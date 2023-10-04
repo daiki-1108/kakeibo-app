@@ -1,0 +1,67 @@
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.alert alert-warning{
+    text-align: center;
+}
+
+h3{
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(243, 22, 22);
+}
+
+.loginform{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+.col-sm-4 {
+  width: 30px;
+}
+
+.new-submit{
+    font-size: 27px;
+    text-align: right;
+    margin-right: 150px;
+}
+
+.loginbutton{
+    margin-top: 30px;
+}
+
+
+
+
+h1{
+    text-align: center;
+    font-size: 50px;
+    color: rgb(240, 11, 11);
+}
+.logincreateform{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 10px;
+}
+.form-controll{
+    height: 25px;
+}
+.submitbtn{
+    display: inline-block;
+    width: 20%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(148, 230, 170);
+    margin-top: 10px;
+}
+.return{
+    text-align: center;
+    margin-top: 10px;
+}
