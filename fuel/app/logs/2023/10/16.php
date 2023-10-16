@@ -82,3 +82,8 @@ ERROR - 2023-10-16 11:09:43 --> Error - Call to undefined method Model_User::fin
 WARNING - 2023-10-16 11:10:15 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
 WARNING - 2023-10-16 11:10:24 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
 WARNING - 2023-10-16 11:10:25 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 11:18:36 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 11:18:36 --> Error - Call to undefined method Model_Record::find() in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 23
+WARNING - 2023-10-16 11:18:50 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 11:18:50 --> Warning - A non-numeric value encountered in C:\xampp\htdocs\fuelphp\fuel\core\classes\model\crud.php on line 209
+WARNING - 2023-10-16 11:19:05 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.

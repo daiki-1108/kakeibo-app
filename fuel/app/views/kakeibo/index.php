@@ -36,7 +36,7 @@
               <?php if($post->category_id != $pre_id): ?>
                   <tr> 
                       <td><a href="/kb/kakeibo/detail/<?php echo $post->category_id; ?>"><?php echo $post->category_name->name; ?></a></td>
-                      <?php for($i = 0; $i < 100; $i++): ?>
+                      <?php for($i = 0; $i < $Max_kinds; $i++): ?>
                         <?php if($post->category_id == $i): ?>
                           <td><?php  echo $category_totals[$i]; ?>円</td>
                         <?php endif; ?>

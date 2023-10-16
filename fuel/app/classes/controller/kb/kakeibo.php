@@ -30,7 +30,9 @@ class Controller_Kb_Kakeibo extends Controller
 		));	
         $All_Total = Arr::sum($posts, 'amount');
         $category_totals = array();
-        for($i = 0; $i < 100; $i++){
+        Config::load('kinds');
+        $Max_kinds = Config::get('kinds');
+        for($i = 0; $i < $Max_kinds; $i++){
             $categorys = Model_Record::find('all', array(
                 'related' => array(
                     'category_name',
@@ -48,6 +50,7 @@ class Controller_Kb_Kakeibo extends Controller
         $data = array(
             'posts' => $posts,
             'All_Total' => $All_Total,
+            'Max_kinds' => $Max_kinds,
             'category_totals' => $category_totals,
         );
         return Response::forge(View::forge('kakeibo/index', $data));
