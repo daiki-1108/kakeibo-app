@@ -50,8 +50,7 @@
     </div>
 </div>
 
-    <script type='text/javascript'  src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.5.0.js"></script>
-    <?php echo Asset::js('kakeibo.js'); ?>
+
 
 </body>
 </html>

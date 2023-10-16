@@ -19,42 +19,36 @@ class Controller_Kb_Kakeibo extends Controller
     //トップ画面
     public function action_index()
     {
-            $userid = Session::get('userid');
-            $posts = Model_Record::find('all', array(
-            'related' => array(
-                'category_name',
-                //リレーションの設定名
-            ),
-            'order_by' => array('category_id' => 'asc'),
-            'where' => array('user_id' => $userid),
-        ));
+        $userid = Session::get('userid');
+        $posts = Model_Record::find('all', array(
+			'related' => array(
+			'category_name',
+			'login',
+		),
+			'order_by' => array('category_id' => 'asc'),
+			'where' => array('user_id' => $userid),
+		));	
         $All_Total = Arr::sum($posts, 'amount');
-
-        $sql_1 = DB::select()->from('record')->where_open()->where('category_id', '=', 1)->and_where('user_id', '=', $userid)->where_close()->execute();
-        $total_1 = Arr::sum($sql_1, 'amount');
-        $sql_2 = DB::select()->from('record')->where_open()->where('category_id', '=', 2)->and_where('user_id', '=', $userid)->where_close()->execute();
-        $total_2 = Arr::sum($sql_2, 'amount');
-        $sql_3 = DB::select()->from('record')->where_open()->where('category_id', '=', 3)->and_where('user_id', '=', $userid)->where_close()->execute();
-        $total_3 = Arr::sum($sql_3, 'amount');
-        $sql_4 = DB::select()->from('record')->where_open()->where('category_id', '=', 4)->and_where('user_id', '=', $userid)->where_close()->execute();
-        $total_4 = Arr::sum($sql_4, 'amount');
-        $sql_5 = DB::select()->from('record')->where_open()->where('category_id', '=', 5)->and_where('user_id', '=', $userid)->where_close()->execute();
-        $total_5 = Arr::sum($sql_5, 'amount');
-        $sql_6 = DB::select()->from('record')->where_open()->where('category_id', '=', 6)->and_where('user_id', '=', $userid)->where_close()->execute();
-        $total_6 = Arr::sum($sql_6, 'amount');
-        $sql_7 = DB::select()->from('record')->where_open()->where('category_id', '=', 7)->and_where('user_id', '=', $userid)->where_close()->execute();
-        $total_7 = Arr::sum($sql_7, 'amount');
-       
+        $category_totals = array();
+        for($i = 0; $i < 100; $i++){
+            $categorys = Model_Record::find('all', array(
+                'related' => array(
+                    'category_name',
+                    'login',
+                ),
+                'where' => array(
+                    'category_id' => $i,
+                    'user_id' => $userid,
+                )
+            ));
+            $total = Arr::sum($categorys, 'amount');
+            $category_totals[$i] = $total;
+        }
+        //DB側でwhere=userid, groupby(category), select category sum(amount)で配列取得。
         $data = array(
             'posts' => $posts,
             'All_Total' => $All_Total,
-            'total_1' => $total_1,
-            'total_2' => $total_2,
-            'total_3' => $total_3,
-            'total_4' => $total_4,
-            'total_5' => $total_5,
-            'total_6' => $total_6,
-            'total_7' => $total_7,
+            'category_totals' => $category_totals,
         );
         return Response::forge(View::forge('kakeibo/index', $data));
     }
@@ -63,7 +57,10 @@ class Controller_Kb_Kakeibo extends Controller
     public function action_createForm()
     {
         $userid = Session::get('userid');
-        if(Input::post()){
+        return View::forge('kakeibo/createForm', );
+    }
+    public function post_createForm()
+    {
         $val = Validation::forge();
         $val->add_field('date', '日付', 'required');#1=フィールド名、２＝日本語名、３＝ルール
         $val->add_field('amount', '金額', 'required');
@@ -78,16 +75,10 @@ class Controller_Kb_Kakeibo extends Controller
             ))->execute();
 
             return View::forge('kakeibo/createForm', );
-            exit;
         }
         else{    #失敗の場合の処理
-            foreach($val->error() as $key => $value){
-                echo $value->get_message();
-            }
-            exit;
+            Response::redirect('/kb/kakeibo/createForm'); 
         }
-        }   
-        return View::forge('kakeibo/createForm', );
     }
 
 
@@ -97,26 +88,28 @@ class Controller_Kb_Kakeibo extends Controller
         $userid = Session::get('userid');
         $posts = Model_Record::find('all', array(
             'related' => array(
-                'category_name', //リレーションの設定名
+                'category_name', 
                 'login',
             ),
             'order_by' => array('category_id' => 'asc'),
             'where' => array(
-                array('id' , $id), 
-                array('user_id' => $userid),
+                'id' => $id, 
+                'user_id' => $userid,
             ),
-        )); 
+        ));
         $data = array(
-            'posts' => $posts,
+            'edit_posts' => $posts,
         );
+        return View::forge('kakeibo/editForm', $data);
+    }
 
-        if(Input::post()){
-            $val = Validation::forge();
-            $val->add_field('date', '日付', 'required');#1=フィールド名、２＝日本語名、３＝ルール
-            $val->add_field('amount', '金額', 'required');
-            if($val->run()){
+    public function post_editForm($id)
+    {
+        $val = Validation::forge();
+        $val->add_field('date', '日付', 'required');#1=フィールド名、２＝日本語名、３＝ルール
+        $val->add_field('amount', '金額', 'required');
+                if($val->run()){
                 #echo '成功';  #成功したとき
-
                 //値設定
                 $edit_data = Model_Record::find($id);
                 $edit_data->set(array(
@@ -125,36 +118,30 @@ class Controller_Kb_Kakeibo extends Controller
                 ));
                 //保存
                 $edit_data->save();
-                
+
                 return View::forge('kakeibo/editForm', $data);
-                exit;
             }
             else{    #失敗の場合の処理
                 foreach($val->error() as $key => $value){
                     echo $value->get_message();
                 }
-                exit;
+                Response::redirect('/kb/kakeibo/editForm');
             }
-            }
-        return View::forge('kakeibo/editForm', $data);
     }
-
-
-
+      
     //詳細画面
     public function action_detail($category_id)
     {
         $userid = Session::get('userid');
         $posts = Model_Record::find('all', array(
             'related' => array(
-                'category_name', //リレーションの設定名
+                'category_name',
                 'login',
             ),
             'order_by' => array('date' => 'desc'),
-            
             'where' => array(
-                array('category_id' , $category_id),
-                array('user_id' => $userid),
+                'category_id' => $category_id,
+                'user_id' => $userid,
             ),
             
         ));
@@ -163,9 +150,6 @@ class Controller_Kb_Kakeibo extends Controller
             'posts' => $posts,
             'total' => $total,
         );
-        //echo '<pre>';
-        //print_r($posts);
-        //echo '</pre>';
             return View::forge('kakeibo/detail', $data);
     } 
 

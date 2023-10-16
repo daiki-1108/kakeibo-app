@@ -1,6 +1,6 @@
 <?php
 
-class Model_Category extends Orm\Model
+class Model_Category extends \Orm\Model
 {
 	protected static $_properties = array(
 		"id" => array(
@@ -86,3 +86,4 @@ class Model_Category extends Orm\Model
 
 
 ?>
+

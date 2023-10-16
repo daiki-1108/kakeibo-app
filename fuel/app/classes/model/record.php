@@ -1,6 +1,5 @@
 <?php
-
-class Model_Record extends Orm\Model
+class Model_Record extends \Orm\Model
 {
 	protected static $_properties = array(
 		"id" => array(
@@ -118,7 +117,54 @@ class Model_Record extends Orm\Model
 		)
 	);
 
+
+	// public static function action_index()
+	// {
+	// 	$posts = Model_Record::find('all', array(
+	// 		'related' => array(
+	// 		'category_name',
+	// 		'login',
+	// 	),
+	// 		'order_by' => array('category_id' => 'asc'),
+	// 		'where' => array('user_id' => $userid),
+	// 	));	
+	// }
+	// public static function action_editForm($id)
+    // {
+	// 	$posts = Model_Record::find('all', array(
+    //         'related' => array(
+    //             'category_name', 
+    //             'login',
+    //         ),
+    //         'order_by' => array('category_id' => 'asc'),
+    //         'where' => array(
+    //             'id' => $id, 
+    //             'user_id' => $userid,
+    //         ),
+    //     )); 
+	// }
+	// public static function action_detail($category_id)
+    // {
+	// 	$posts = Model_Record::find('all', array(
+    //         'related' => array(
+    //             'category_name',
+    //             'login',
+    //         ),
+    //         'order_by' => array('date' => 'desc'),
+    //         'where' => array(
+    //             'category_id' => $category_id,
+    //             'user_id' => $userid,
+    //         ),
+            
+    //     ));
+	// }
+
+
+
+
 }
+
+
 
 
 
