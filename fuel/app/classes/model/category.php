@@ -1,6 +1,6 @@
 <?php
 
-class Model_Category extends \Orm\Model
+class Model_Category extends Orm\Model
 {
 	protected static $_properties = array(
 		"id" => array(
@@ -26,18 +26,18 @@ class Model_Category extends \Orm\Model
 		
 	);
 
-	protected static $_observers = array(
-		'Orm\Observer_CreatedAt' => array(
-			'events' => array('before_insert'),
-			'property' => 'created_at',
-			'mysql_timestamp' => true,
-		),
-		'Orm\Observer_UpdatedAt' => array(
-			'events' => array('before_update'),
-			'property' => 'updated_at',
-			'mysql_timestamp' => true,
-		),
-	);
+	// protected static $_observers = array(
+	// 	'Orm\Observer_CreatedAt' => array(
+	// 		'events' => array('before_insert'),
+	// 		'property' => 'created_at',
+	// 		'mysql_timestamp' => true,
+	// 	),
+	// 	'Orm\Observer_UpdatedAt' => array(
+	// 		'events' => array('before_update'),
+	// 		'property' => 'updated_at',
+	// 		'mysql_timestamp' => true,
+	// 	),
+	// );
 
 	protected static $_table_name = 'category';
 

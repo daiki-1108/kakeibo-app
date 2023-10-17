@@ -20,6 +20,7 @@ class Controller_Kb_Kakeibo extends Controller
     public function action_index()
     {
         $userid = Session::get('userid');
+        $All_Total = Model_Record::getTotalAmount($userid);
         $posts = Model_Record::find('all', array(
 			'related' => array(
 			'category_name',
@@ -27,10 +28,10 @@ class Controller_Kb_Kakeibo extends Controller
 		),
 			'order_by' => array('category_id' => 'asc'),
 			'where' => array('user_id' => $userid),
-		));	
-        $All_Total = Arr::sum($posts, 'amount');
+		));
+
         $category_totals = array();
-        Config::load('kinds');
+        Config::load('define');
         $Max_kinds = Config::get('kinds');
         for($i = 0; $i < $Max_kinds; $i++){
             $categorys = Model_Record::find('all', array(
@@ -47,11 +48,14 @@ class Controller_Kb_Kakeibo extends Controller
             $category_totals[$i] = $total;
         }
         //DB側でwhere=userid, groupby(category), select category sum(amount)で配列取得。
+        Config::load('define',true);
+        $category_name = Config::get('category_name');
         $data = array(
             'posts' => $posts,
             'All_Total' => $All_Total,
             'Max_kinds' => $Max_kinds,
             'category_totals' => $category_totals,
+            'category_name' => $category_name,
         );
         return Response::forge(View::forge('kakeibo/index', $data));
     }

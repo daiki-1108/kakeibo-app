@@ -1,5 +1,5 @@
 <?php
-class Model_Record extends \Orm\Model
+class Model_Record extends Orm\Model
 {
 	protected static $_properties = array(
 		"id" => array(
@@ -47,18 +47,18 @@ class Model_Record extends \Orm\Model
 		
 	);
 
-	protected static $_observers = array(
-		'Orm\Observer_CreatedAt' => array(
-			'events' => array('before_insert'),
-			'property' => 'created_at',
-			'mysql_timestamp' => true,
-		),
-		'Orm\Observer_UpdatedAt' => array(
-			'events' => array('before_update'),
-			'property' => 'updated_at',
-			'mysql_timestamp' => true,
-		),
-	);
+	// protected static $_observers = array(
+	// 	'Orm\Observer_CreatedAt' => array(
+	// 		'events' => array('before_insert'),
+	// 		'property' => 'created_at',
+	// 		'mysql_timestamp' => true,
+	// 	),
+	// 	'Orm\Observer_UpdatedAt' => array(
+	// 		'events' => array('before_update'),
+	// 		'property' => 'updated_at',
+	// 		'mysql_timestamp' => true,
+	// 	),
+	// );
 
 	protected static $_table_name = 'record';
 
@@ -117,18 +117,12 @@ class Model_Record extends \Orm\Model
 		)
 	);
 
-
-	// public static function action_index()
-	// {
-	// 	$posts = Model_Record::find('all', array(
-	// 		'related' => array(
-	// 		'category_name',
-	// 		'login',
-	// 	),
-	// 		'order_by' => array('category_id' => 'asc'),
-	// 		'where' => array('user_id' => $userid),
-	// 	));	
-	// }
+	public static function getTotalAmount($userid) {
+        $query = DB::query('SELECT SUM(amount) FROM record WHERE user_id = :userid');
+        $query->parameters(array(':userid' => $userid));
+        $result = $query->execute();
+        return $result->get('All_Total');
+    }
 	// public static function action_editForm($id)
     // {
 	// 	$posts = Model_Record::find('all', array(

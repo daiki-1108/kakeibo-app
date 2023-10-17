@@ -87,3 +87,98 @@ ERROR - 2023-10-16 11:18:36 --> Error - Call to undefined method Model_Record::f
 WARNING - 2023-10-16 11:18:50 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
 ERROR - 2023-10-16 11:18:50 --> Warning - A non-numeric value encountered in C:\xampp\htdocs\fuelphp\fuel\core\classes\model\crud.php on line 209
 WARNING - 2023-10-16 11:19:05 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 14:53:00 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 14:53:08 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 14:53:08 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 14:53:08 --> Error - Call to undefined method Model_Record::find() in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 23
+WARNING - 2023-10-16 15:02:42 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:02:42 --> Error - First parameter must be an array or ArrayAccess object. in C:\xampp\htdocs\fuelphp\fuel\core\classes\arr.php on line 1089
+WARNING - 2023-10-16 15:02:44 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:02:44 --> Error - First parameter must be an array or ArrayAccess object. in C:\xampp\htdocs\fuelphp\fuel\core\classes\arr.php on line 1089
+WARNING - 2023-10-16 15:21:40 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:21:40 --> Error - Class 'ModelRecord' not found in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 23
+WARNING - 2023-10-16 15:21:41 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:21:41 --> Error - Class 'ModelRecord' not found in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 23
+WARNING - 2023-10-16 15:21:42 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:21:42 --> Error - Class 'ModelRecord' not found in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 23
+WARNING - 2023-10-16 15:22:00 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:22:00 --> Error - File "APPPATH/\classes\model\record.php" does not contain class "Model_Record" in C:\xampp\htdocs\fuelphp\fuel\core\classes\autoloader.php on line 397
+WARNING - 2023-10-16 15:22:20 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:22:20 --> Error - Class 'ModelRecord' not found in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 23
+WARNING - 2023-10-16 15:25:10 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:25:10 --> Error - Class 'ModelRecord' not found in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 23
+WARNING - 2023-10-16 15:25:11 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:25:11 --> Error - Class 'ModelRecord' not found in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 23
+WARNING - 2023-10-16 15:25:12 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:25:12 --> Error - Class 'ModelRecord' not found in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 23
+WARNING - 2023-10-16 15:25:25 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:25:25 --> 42S02 - SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kakeibo.records' doesn't exist with query: "SELECT SUM(amount) AS total FROM records WHERE user_id = 5" in C:\xampp\htdocs\fuelphp\fuel\core\classes\database\pdo\connection.php on line 235
+WARNING - 2023-10-16 15:26:54 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:26:54 --> Error - File "APPPATH/\classes\model\record.php" does not contain class "Model\Record" in C:\xampp\htdocs\fuelphp\fuel\core\classes\autoloader.php on line 397
+WARNING - 2023-10-16 15:31:29 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:31:29 --> Error - File "APPPATH/\classes\model\record.php" does not contain class "Model\Record" in C:\xampp\htdocs\fuelphp\fuel\core\classes\autoloader.php on line 397
+WARNING - 2023-10-16 15:34:18 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:34:18 --> Error - File "APPPATH/\classes\model\record.php" does not contain class "Model\Record" in C:\xampp\htdocs\fuelphp\fuel\core\classes\autoloader.php on line 397
+WARNING - 2023-10-16 15:34:19 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:34:19 --> Error - File "APPPATH/\classes\model\record.php" does not contain class "Model\Record" in C:\xampp\htdocs\fuelphp\fuel\core\classes\autoloader.php on line 397
+WARNING - 2023-10-16 15:34:21 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:34:31 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:34:31 --> Error - Call to undefined method Model_User::find() in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\login.php on line 57
+WARNING - 2023-10-16 15:35:32 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:35:32 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:35:32 --> Error - File "APPPATH/\classes\model\record.php" does not contain class "Model\Record" in C:\xampp\htdocs\fuelphp\fuel\core\classes\autoloader.php on line 397
+WARNING - 2023-10-16 15:35:35 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:35:35 --> Error - File "APPPATH/\classes\model\record.php" does not contain class "Model\Record" in C:\xampp\htdocs\fuelphp\fuel\core\classes\autoloader.php on line 397
+WARNING - 2023-10-16 15:35:38 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:35:44 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:35:45 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:35:45 --> Error - File "APPPATH/\classes\model\record.php" does not contain class "Model\Record" in C:\xampp\htdocs\fuelphp\fuel\core\classes\autoloader.php on line 397
+WARNING - 2023-10-16 15:39:47 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:39:47 --> 42S02 - SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kakeibo.records' doesn't exist with query: "SELECT SUM(amount) AS total FROM records WHERE user_id = 5" in C:\xampp\htdocs\fuelphp\fuel\core\classes\database\pdo\connection.php on line 235
+WARNING - 2023-10-16 15:39:52 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:39:53 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:39:53 --> 42S02 - SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kakeibo.records' doesn't exist with query: "SELECT SUM(amount) AS total FROM records WHERE user_id = 5" in C:\xampp\htdocs\fuelphp\fuel\core\classes\database\pdo\connection.php on line 235
+WARNING - 2023-10-16 15:41:24 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:41:24 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:41:24 --> Error - File "APPPATH/\classes\model\record.php" does not contain class "Model\Record" in C:\xampp\htdocs\fuelphp\fuel\core\classes\autoloader.php on line 397
+WARNING - 2023-10-16 15:41:49 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:41:49 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:41:49 --> Warning - The use statement with non-compound name 'Record' has no effect in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 3
+WARNING - 2023-10-16 15:42:00 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:42:00 --> Error - Class 'Record' not found in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 23
+WARNING - 2023-10-16 15:42:31 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:42:31 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:42:31 --> Error - File "APPPATH/\classes\model\record.php" does not contain class "Model\Record" in C:\xampp\htdocs\fuelphp\fuel\core\classes\autoloader.php on line 397
+WARNING - 2023-10-16 15:42:46 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:42:47 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:42:47 --> Error - Call to undefined method Model_Record::find() in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 30
+WARNING - 2023-10-16 15:43:10 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:43:10 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:43:11 --> Notice - Undefined variable: posts in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 45
+WARNING - 2023-10-16 15:43:25 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:43:25 --> Notice - Undefined variable: posts in C:\xampp\htdocs\fuelphp\fuel\app\views\kakeibo\index.php on line 35
+WARNING - 2023-10-16 15:46:55 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:46:55 --> 42000 - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM record WHERE user_id = 5' at line 1 with query: "SELECT FROM record WHERE user_id = 5" in C:\xampp\htdocs\fuelphp\fuel\core\classes\database\pdo\connection.php on line 235
+WARNING - 2023-10-16 15:49:06 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:49:06 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:49:06 --> Notice - Undefined variable: posts in C:\xampp\htdocs\fuelphp\fuel\app\views\kakeibo\index.php on line 35
+WARNING - 2023-10-16 15:49:37 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:49:37 --> Notice - Undefined variable: posts in C:\xampp\htdocs\fuelphp\fuel\app\views\kakeibo\index.php on line 35
+WARNING - 2023-10-16 15:49:41 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:49:41 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:49:41 --> Notice - Undefined variable: posts in C:\xampp\htdocs\fuelphp\fuel\app\views\kakeibo\index.php on line 35
+WARNING - 2023-10-16 15:49:53 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:49:53 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:49:53 --> Notice - Trying to get property 'category_id' of non-object in C:\xampp\htdocs\fuelphp\fuel\app\views\kakeibo\index.php on line 36
+WARNING - 2023-10-16 15:51:02 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:51:03 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-10-16 15:51:03 --> Notice - Undefined variable: category_id in C:\xampp\htdocs\fuelphp\fuel\app\classes\controller\kb\kakeibo.php on line 31
+WARNING - 2023-10-16 15:51:58 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:51:58 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:53:01 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:53:03 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:53:04 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:53:04 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:53:07 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:53:07 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-10-16 15:53:52 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
