@@ -11,7 +11,7 @@ class Controller_Kb_login extends Controller
         Auth::check() and Response::redirect('/kb/kakeibo/index');
         //エラーメッセージ用変数初期化
         //$error = null;
-          // ビューテンプレートを呼び出し
+        // ビューテンプレートを呼び出し
         $view = View::forge('login/login');
 
         
@@ -20,6 +20,42 @@ class Controller_Kb_login extends Controller
         //エラーメッセージをビューのセット
         //$view->set('error', $error);
         return $view;
+    }
+    public function post_login(){
+        
+        $user = Model_User::find('first', array(
+            'where' => array(
+                'username' => Input::post('username'),
+                'password' => Input::post('password'),
+            )
+        ));
+            $val = Validation::forge();
+            $val->add_field('username', 'ユーザネーム', 'required')->add_rule('min_length', 4)->add_rule('max_length', 15);
+            $val->add_field('password', 'パスワード', 'required')->add_rule('min_length', 6)->add_rule('max_length', 20);
+            if($val->run()){
+                //ログイン用のオブジェクト生成
+                $auth = Auth::instance();
+                // var_dump(Input::post());
+                // exit;
+                if($auth->login(Input::post('username'), Input::post('password')))
+                //if ($user && $user->username == Input::post('username') && $user->password == Input::post('password'))
+                {
+                    var_dump(Input::post());
+                    exit;
+                    //ログイン成功時
+                   $error = 'ログインに成功しました';
+                   Session::set('userid', $user->id);
+                   Response::redirect('/kb/kakeibo/index'); 
+                }else{
+                    // var_dump(Input::post());
+                    // exit;
+                    // ログイン失敗時の処理
+                    // $error = 'ログインに失敗しました';:
+                    Response::redirect('/kb/login/login');
+                }
+                 
+            }       
+            
     }
 
     public function action_logincreateForm(){
@@ -52,35 +88,7 @@ class Controller_Kb_login extends Controller
         }   
                 return View::forge('login/logincreateForm', );
     }
-    public function post_login(){
-        
-        $user = Model_User::find('first', array(
-            'where' => array(
-                'username' => Input::post('username'),
-                'password' => Input::post('password'),
-            )
-        ));
-
-            $val = Validation::forge();
-            $val->add_field('username', 'ユーザネーム', 'required')->add_rule('min_length', 4)->add_rule('max_length', 15);
-            $val->add_field('password', 'パスワード', 'required')->add_rule('min_length', 6)->add_rule('max_length', 20);
-            if($val->run()){
-                //ログイン用のオブジェクト生成
-                //$auth = Auth::instance();
-                if ($user && $user->username == Input::post('username') && $user->password == Input::post('password')) {
-                   //var_dump(Input::post());
-                   //exit;
-                    //ログイン成功時
-                   $error = 'ログインに成功しました';
-                   Session::set('userid', $user->id);
-                   Response::redirect('/kb/kakeibo/index');
-                   
-                }
-            }
-                     // ログイン失敗時の処理
-                   // $error = 'ログインに失敗しました';:
-            
-    }
+   
 
 }
     

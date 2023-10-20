@@ -41,7 +41,7 @@ return array(
 	 *  must include: username, password, email, last_login,
 	 * login_hash, group & profile_fields
 	 */
-	'table_columns' => null,
+	'table_columns' => array('username', 'password'),
 
 	/**
 	 * This will allow you to use the group & acl driver for non-logged in users
@@ -82,7 +82,7 @@ return array(
 	'groups' => array(
 		
 		 
-		 -1   => array('name' => 'Banned', 'roles' => array('banned')),
+		 -1    => array('name' => 'Banned', 'roles' => array('banned')),
 		  0    => array('name' => 'Guests', 'roles' => array()),
 		  1    => array('name' => 'Users', 'roles' => array('user')),
 		  50   => array('name' => 'Moderators', 'roles' => array('user', 'moderator')),
@@ -117,7 +117,7 @@ return array(
 	/**
 	 * Salt for the login hash
 	 */
-	'login_hash_salt' => 'tonton',
+	'login_hash_salt' => 'tonton_login',
 
 	/**
 	 * $_POST key for login username

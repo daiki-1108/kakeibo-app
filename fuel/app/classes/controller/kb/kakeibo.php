@@ -112,13 +112,24 @@ class Controller_Kb_Kakeibo extends Controller
 
     public function post_editForm($id)
     {
+        $userid = Session::get('userid');
         $val = Validation::forge();
         $val->add_field('date', '日付', 'required');#1=フィールド名、２＝日本語名、３＝ルール
         $val->add_field('amount', '金額', 'required');
                 if($val->run()){
                 #echo '成功';  #成功したとき
                 //値設定
-                $edit_data = Model_Record::find($id);
+                $edit_data = Model_Record::find('all', array(    
+                    'related' => array(
+                        'category_name', 
+                        'login',
+                    ),
+                    'order_by' => array('category_id' => 'asc'),
+                    'where' => array(
+                        'id' => $id, 
+                        'user_id' => $userid,
+                    ),
+                ));
                 $edit_data->set(array(
                     'date' => Input::post('date'),
                     'amount' => Input::post('amount'),
@@ -163,13 +174,26 @@ class Controller_Kb_Kakeibo extends Controller
     //削除画面
     public function action_delete($id)
     {
-        $post = Model_Record::find($id); // 対象のレコードを取得
-        if ($post) {
-            // レコードが見つかった場合の処理
-            // 削除
-            $post->delete();
-            Session::set_flash('success', 'Deleted');
-        } else {
+        $userid = Session::get('userid');
+        $posts = Model_Record::find('all', array(    // 対象のレコードを取得
+            'related' => array(
+                'category_name', 
+                'login',
+            ),
+            'order_by' => array('category_id' => 'asc'),
+            'where' => array(
+                'id' => $id, 
+                'user_id' => $userid,
+            ),
+        ));
+        if($posts){
+            if ($posts->user_id == $userid) {
+                // レコードが見つかった場合の処理
+                // 削除
+                $posts->delete();
+                Session::set_flash('success', 'Deleted');
+            } 
+        }else {
             // レコードが見つからなかった場合の処理
             Session::set_flash('error', 'Record not found');
         }
