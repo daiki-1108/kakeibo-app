@@ -13,47 +13,45 @@ class Controller_Kb_login extends Controller
         //$error = null;
         // ビューテンプレートを呼び出し
         $view = View::forge('login/login');
-
-        
         //ログインボタンが押されたら、ユーザ名、パスワードをチェックする
-        
         //エラーメッセージをビューのセット
         //$view->set('error', $error);
         return $view;
     }
     public function post_login(){
-        
-        $user = Model_User::find('first', array(
-            'where' => array(
-                'username' => Input::post('username'),
-                'password' => Input::post('password'),
-            )
-        ));
             $val = Validation::forge();
             $val->add_field('username', 'ユーザネーム', 'required')->add_rule('min_length', 4)->add_rule('max_length', 15);
             $val->add_field('password', 'パスワード', 'required')->add_rule('min_length', 6)->add_rule('max_length', 20);
             if($val->run()){
                 //ログイン用のオブジェクト生成
                 $auth = Auth::instance();
-                // var_dump(Input::post());
-                // exit;
-                if($auth->login(Input::post('username'), Input::post('password')))
-                //if ($user && $user->username == Input::post('username') && $user->password == Input::post('password'))
-                {
-                    var_dump(Input::post());
-                    exit;
-                    //ログイン成功時
-                   $error = 'ログインに成功しました';
-                   Session::set('userid', $user->id);
-                   Response::redirect('/kb/kakeibo/index'); 
+
+                $username = Input::post('username');
+                $password = Input::post('password');
+                $user = Model_User::find('first', array(
+                    'where' => array(
+                        'username' => $username
+                    )
+                ));
+
+            // if (!Auth::check()){
+                if($user){
+                    if ($user && $user->username == Input::post('username') && $user->password == Input::post('password'))
+                    //if ($auth->login(Input::post('username'), Input::post('password')))
+                    {
+                        //ログイン成功時
+                        Session::set('userid', $user->id);
+                        Response::redirect('/kb/kakeibo/index'); 
+                    }else{
+                        echo'ログイン失敗';
+                        // ログイン失敗時の処理
+                        //Response::redirect('/kb/login/login');
+                    }
                 }else{
-                    // var_dump(Input::post());
-                    // exit;
-                    // ログイン失敗時の処理
-                    // $error = 'ログインに失敗しました';:
-                    Response::redirect('/kb/login/login');
+                     echo'ユーザがいません';
                 }
-                 
+            //} 
+            
             }       
             
     }
@@ -62,21 +60,21 @@ class Controller_Kb_login extends Controller
         if(Input::post()){
             $val = Validation::forge();
             $val->add_field('username', 'ユーザネーム', 'required')->add_rule('min_length', 4)->add_rule('max_length', 15);
-             $val->add_field('password', 'パスワード', 'required')->add_rule('min_length', 6)->add_rule('max_length', 20);
+            $val->add_field('password', 'パスワード', 'required')->add_rule('min_length', 6)->add_rule('max_length', 20);
             $val->add_field('confirmation_password', '確認用パスワード', 'required')->add_rule('min_length', 6)->add_rule('max_length', 20);
             if($val->run()){
-                    #echo '成功';  #成功したとき
                     //パスワードと確認用パスワードが一致したらデータを登録
+                    Auth::instance();
                     if(Input::post('password') == Input::post('confirmation_password')){
-                        DB::insert('users')->set(array(
-                            'username' => Input::post('username'),
-                            'password' => Input::post('password'),
-                        ))->execute();
+                        Auth::create_user(
+                            Input::post('username'),
+                            Input::post('password'),
+                            Input::post('email'),
+                            1,
+                       );
                         return View::forge('login/logincreateForm', );
-                        exit;
                     }else{
                         echo 'パスワードが一致していません';
-                        exit;
                     }
                 }
                 else{    #失敗の場合の処理

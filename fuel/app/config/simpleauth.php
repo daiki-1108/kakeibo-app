@@ -117,7 +117,7 @@ return array(
 	/**
 	 * Salt for the login hash
 	 */
-	'login_hash_salt' => 'tonton_login',
+	'login_hash_salt' => 'tonton',
 
 	/**
 	 * $_POST key for login username

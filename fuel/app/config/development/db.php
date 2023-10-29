@@ -12,13 +12,41 @@
 
 /**
  * -----------------------------------------------------------------------------
- *  Database settings for development environment
+ *  Global database settings
  * -----------------------------------------------------------------------------
  *
- *  These settings get merged with the global settings.
+ *  Set database configurations here to override environment specific
+ *  configurations
  *
  */
 
+
+
 return array(
-	
+    //  'default' => array(
+	//  	'connection' => array(
+	// 		'dsn'      => 'mysql:host=localhost;dbname=kakeibo',
+	//  		'username' => 'root',
+	//  		'password' => '',
+	//  	),
+	//  ),
+   
+ 	'kakeibo' => array(
+         'type'           => 'pdo',
+         'connection'     => array(
+             'dsn'            => 'mysql:host=127.0.0.1;dbname=kakeibo',
+             'username'       => 'root',
+            'password'       => '',
+        //    'persistent'     => false,
+        //     'compress'       => false,
+         ),
+        //  'identifier'   => '`',
+        //  'table_prefix'   => '',
+        //  'charset'        => 'utf8',
+        //  'enable_cache'   => true,
+        // 'profiling'      => false,
+ 	)
 );
+
+
+?>

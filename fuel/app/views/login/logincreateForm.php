@@ -19,7 +19,10 @@
             <label for="username">ユーザー名</label>
                 <?php echo Form::input('username', null, ['id' => 'username', 'class' => 'form-controll']); ?>
         </div>
-        
+        <div class="logincreateform">
+            <label for="email">メールアドレス</label>
+                <?php echo Form::input('email', null, ['id' => 'email', 'class' => 'form-controll']); ?>
+        </div>
         <div class="logincreateform">
             <label for="password">パスワード</label>
                 <?php echo Form::password('password', null, ['id' => 'password', 'class' => 'form-controll']); ?>
