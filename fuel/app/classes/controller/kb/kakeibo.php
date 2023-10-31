@@ -8,19 +8,17 @@ class Controller_Kb_Kakeibo extends Controller
 {
     public function before(){
         parent::before();
-        $userid = Session::get('userid');
-        // キャッシュを無効化
-        Response::set_cache(false);
         
         //未ログイン時、ログインページリダイレクト
-        // if(!Auth::check()){
-        //    Response::redirect('/kb/login/login');
-        // }
+        if(!Auth::check()){
+           Response::redirect('/kb/login/login');
+        }
     }
     
     //トップ画面
     public function action_index()
     {
+        $userid = Session::get('userid');
         $All_Total = Model_Record::getTotalAmount($userid);
         $posts = Model_Record::find('all', array(
 			'related' => array(
@@ -68,6 +66,7 @@ class Controller_Kb_Kakeibo extends Controller
     }
     public function post_createForm()
     {
+        $userid = Session::get('userid');
         $val = Validation::forge();
         $val->add_field('date', '日付', 'required');#1=フィールド名、２＝日本語名、３＝ルール
         $val->add_field('amount', '金額', 'required');
@@ -92,7 +91,7 @@ class Controller_Kb_Kakeibo extends Controller
     //編集画面
     public function action_editForm($id)
     {
-
+        $userid = Session::get('userid');
         $posts = Model_Record::find('all', array(
             'related' => array(
                 'category_name', 
@@ -112,6 +111,7 @@ class Controller_Kb_Kakeibo extends Controller
 
     public function post_editForm($id)
     {
+        $userid = Session::get('userid');
         $val = Validation::forge();
         $val->add_field('date', '日付', 'required');#1=フィールド名、２＝日本語名、３＝ルール
         $val->add_field('amount', '金額', 'required');
@@ -149,6 +149,7 @@ class Controller_Kb_Kakeibo extends Controller
     //詳細画面
     public function action_detail($category_id)
     {
+        $userid = Session::get('userid');
         $posts = Model_Record::find('all', array(
             'related' => array(
                 'category_name',
@@ -172,6 +173,7 @@ class Controller_Kb_Kakeibo extends Controller
     //削除画面
     public function action_delete($id)
     {
+        $userid = Session::get('userid');
         $posts = Model_Record::find('all', array(    // 対象のレコードを取得
             'related' => array(
                 'category_name', 
@@ -200,6 +202,7 @@ class Controller_Kb_Kakeibo extends Controller
     }
     public function action_logout(){
         //ログイン用のオブジェクト生成
+        $userid = Session::get('userid');
         $auth = Auth::instance();
         Auth::logout();
         Session::delete('userid');

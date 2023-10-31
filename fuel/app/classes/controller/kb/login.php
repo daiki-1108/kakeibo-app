@@ -36,13 +36,15 @@ class Controller_Kb_login extends Controller
 
             // if (!Auth::check()){
                 if($user){
-                    if ($user && $user->username == Input::post('username') && $user->password == Input::post('password'))
-                    //if ($auth->login(Input::post('username'), Input::post('password')))
+                    //if ($user && $user->username == Input::post('username') && $user->password == Input::post('password'))
+                    if ($auth->login(Input::post('username'), Input::post('password')))
                     {
                         //ログイン成功時
                         Session::set('userid', $user->id);
                         Response::redirect('/kb/kakeibo/index'); 
                     }else{
+                        var_dump($_POST);
+                        exit;
                         echo'ログイン失敗';
                         // ログイン失敗時の処理
                         //Response::redirect('/kb/login/login');

@@ -41,8 +41,8 @@ return array(
 	 *  must include: username, password, email, last_login,
 	 * login_hash, group & profile_fields
 	 */
-	'table_columns' => array('username', 'password'),
-
+	'table_columns' => array('*'),
+	// 'table_columns' => array('username', 'password'),
 	/**
 	 * This will allow you to use the group & acl driver for non-logged in users
 	 */

@@ -23,37 +23,26 @@
           <a href="/kb/kakeibo/createForm">新規入力</a>
         </td> 
       </div>
-    
-      <table class="top_detail">
-        <tr>
-          <th class="category">カテゴリ</th>
-          <th class="total">合計額</th>
-        </tr> 
 <!-- 各カテゴリの合計額を表示 -->
-<!-- 合計額はデータベースから取得する -->
-
-            <?php $pre_id = 0 ?>
-            <?php foreach ($posts as $post): ?>
-              <?php if($post->category_id != $pre_id): ?>
-                  <tr> 
-                    <td><a href="/kb/kakeibo/detail/<?php echo $post->category_id; ?>"><?php echo $post->category_name->name; ?></a></td>
-                      <?php for($i = 0; $i < $Max_kinds; $i++): ?>
-                        <?php if($post->category_id == $i): ?>
-                          <td><?php  echo $category_totals[$i]; ?>円</td>
-                        <?php endif; ?>
-                       <?php endfor; ?>
-                  </tr>
-                <?php $pre_id = $post->category_id ?> 
-              <?php endif; ?>
-            <?php endforeach; ?>
-        </table>
+<!-- 合計額はデータベースから取得する -->   
+      <div id="category-totals-container"></div>
         
-        <div id="like_button_container"></div>
+      <div id="like_button_container"></div>
 </div>   
   
+
+      <script>
+        var categoryTotalsData = {
+          category_name : <?php echo json_encode($category_name); ?>,
+          categoryTotals : <?php echo json_encode($category_totals); ?>,
+        };
+      </script>
+
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <?php echo Asset::js('like_button.js'); ?>
+  <?php echo Asset::js('kakeibo_category.jsx'); ?>
+  <?php echo Asset::js('like_button.jsx'); ?>
+  
 
 </body>
 </html>
