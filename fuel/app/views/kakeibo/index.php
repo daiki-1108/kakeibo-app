@@ -39,7 +39,7 @@
 
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <?php echo Asset::js('kakeibo_category.js'); ?>
+  <?php echo Asset::js('kakeibo_category.jsx'); ?>
   <?php echo Asset::js('like_button.jsx'); ?>
   
 
