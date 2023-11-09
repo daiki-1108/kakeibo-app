@@ -1,21 +1,13 @@
 <?php
-
-use \Model\Record;
-use \Model\Cateogry;
 use \Model\User;
 
 class Controller_Kb_login extends Controller
 {
     public function action_login(){
-        //すでにログイン済であればログイン後のページへリダイレクト
         Auth::check() and Response::redirect('/kb/kakeibo/index');
-        //エラーメッセージ用変数初期化
-        //$error = null;
-        // ビューテンプレートを呼び出し
+        $error = null;
         $view = View::forge('login/login');
-        //ログインボタンが押されたら、ユーザ名、パスワードをチェックする
-        //エラーメッセージをビューのセット
-        //$view->set('error', $error);
+        $view->set('error', $error);
         return $view;
     }
     public function post_login(){
@@ -33,29 +25,24 @@ class Controller_Kb_login extends Controller
                         'username' => $username
                     )
                 ));
+                
 
-            // if (!Auth::check()){
+            if (!Auth::check()){
                 if($user){
-                    //if ($user && $user->username == Input::post('username') && $user->password == Input::post('password'))
                     if ($auth->login(Input::post('username'), Input::post('password')))
                     {
                         //ログイン成功時
                         Session::set('userid', $user->id);
                         Response::redirect('/kb/kakeibo/index'); 
                     }else{
-                        var_dump($_POST);
-                        exit;
-                        echo'ログイン失敗';
                         // ログイン失敗時の処理
-                        //Response::redirect('/kb/login/login');
+                        Response::redirect('/kb/login/login');
                     }
                 }else{
                      echo'ユーザがいません';
                 }
-            //} 
-            
+            } 
             }       
-            
     }
 
     public function action_logincreateForm(){

@@ -22,9 +22,67 @@
         </table>
 
 
+
+        <div id="category-totals-container"></div>
         {Object.keys(categoryTotals).map(categoryId=> (    //mapメソッドでループ
           <tr key={categoryId}>
             <td><a href={`/kb/kakeibo/detail/${categoryId}`}>{category_name[categoryId]}</a></td>
             <td>{categoryTotals[categoryId].total}円</td>
           </tr>
         ))}
+        <script>
+       let category_name = JSON.parse(<?php echo json_encode($posts); ?>);
+       let category_name = JSON.parse(<?php echo json_encode($category_name); ?>);
+       let categoryTotals = JSON.parse(<?php echo json_encode($category_totals); ?>);
+   </script>
+   
+const root = ReactDOM.render(
+  <CategoryTotals categoryTotals={categoryTotalsData} />,
+  document.getElementById('category-totals-container')
+  );
+  root.render(CategoryTotals);
+  import React from 'react';
+
+var roop_categorytotals = () => {
+  const items = [];
+  for (let i = 0; i < categoryTotals.length; i++) {
+    items.push(<li>{ categoryTotals[i] }</li>)
+  }
+  return <ul>{ items }</ul>;
+};
+
+var roop_categoryname = () => {
+  const names = [];
+  for (let i = 0; i < category_name.length; i++){
+    names.push(<li>{categoryName[i]}</li>)
+  }
+  return <ui>{names}</ui>;
+}
+
+const CategoryTotals = () => {
+  return (
+    <table>
+      <thead className="top_detail">
+        <tr>
+          <th className="category">カテゴリ</th>
+          <th className="total">合計額</th>
+        </tr>
+      </thead>
+      <tbody>
+            <td><a href={`/kb/kakeibo/detail/${categoryId}`}>{roop_categoryname()}</a></td>
+            <td>{roop_categorytotals()}円</td>
+      </tbody>
+    </table>
+  );
+};
+
+
+<option value="0">選択してください</option>
+                <option value="1">食費</option>
+                <option value="2">交通費</option>
+                <option value="3">趣味</option>
+                <option value="4">日用品</option>
+                <option value="5">交際費</option>
+                <option value="6">衣服・美容</option>
+                <option value="7">その他</option>
+     

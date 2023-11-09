@@ -10,6 +10,7 @@
 <body>
 <div class="colorchangeanime_bg">
       <h1>編集</h1>
+      <?php $pre_id = 0 ?>
       <?php foreach ($posts as $post): ?>
       <form method="POST" action="/kb/kakeibo/editForm/<?php echo $post->id ?>"> <!--送信先-->
      
@@ -30,26 +31,15 @@
         </div>
         
       </form>
-      <?php endforeach; ?>
-      
-      <?php $pre_id = 0 ?>
-      <?php foreach ($posts as $post): ?>
+
         <?php if($post->category_id != $pre_id): ?>
           <div class="return">
             <td ><a href="/kb/kakeibo/detail/<?php echo $post->category_id; ?>">戻る</a></td>
           </div>
-            <?php $pre_id = $post->category_id ?>
+          <?php $pre_id = $post->category_id ?>
         <?php endif; ?>
       <?php endforeach; ?>
-  <?php
-    if (isset($_POST['send'])) {
-    // 保存ボタンが押された場合の処理を行う
 
-    // 保存処理が成功したら詳細画面にリダイレクト
-    Response::redirect('/kb/kakeibo/index/' . $post->category_id);
-    exit;
-    }
-  ?>
 </div>
 
 <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>

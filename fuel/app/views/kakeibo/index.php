@@ -8,7 +8,7 @@
     <?php echo Asset::css('back.css'); ?>
 </head>
 <body>
-<div class="colorchangeanime_bg">
+  <div class="colorchangeanime_bg">
       <h1>家計簿</h1>
       <div>
         <td class="logout">
@@ -25,22 +25,21 @@
       </div>
 <!-- 各カテゴリの合計額を表示 -->
 <!-- 合計額はデータベースから取得する -->   
+
       <div id="category-totals-container"></div>
-        
+
       <div id="like_button_container"></div>
-</div>   
+  </div>   
   
 
       <script>
-        var categoryTotalsData = {
-          category_name : <?php echo json_encode($category_name); ?>,
-          categoryTotals : <?php echo json_encode($category_totals); ?>,
-        };
-      </script>
+        let posts = JSON.parse('<?php echo json_encode($posts); ?>');
+        let categoryTotals = JSON.parse(<?php echo json_encode($category_totals); ?>);
+      </script> 
 
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <?php echo Asset::js('kakeibo_category.jsx'); ?>
+  <?php echo Asset::js('kakeibo_category.js'); ?>
   <?php echo Asset::js('like_button.jsx'); ?>
   
 

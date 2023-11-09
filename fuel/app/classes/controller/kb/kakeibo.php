@@ -1,8 +1,6 @@
 <?php
 
 use \Model\Record;
-use \Model\Cateogry;
-use \Model\User;
 
 class Controller_Kb_Kakeibo extends Controller
 {
@@ -13,6 +11,7 @@ class Controller_Kb_Kakeibo extends Controller
         if(!Auth::check()){
            Response::redirect('/kb/login/login');
         }
+        $userid = Session::get('userid');
     }
     
     //トップ画面
@@ -21,34 +20,30 @@ class Controller_Kb_Kakeibo extends Controller
         $userid = Session::get('userid');
         $All_Total = Model_Record::getTotalAmount($userid);
         $posts = Model_Record::find('all', array(
-			'related' => array(
-			'category_name',
-			'login',
-		),
 			'order_by' => array('category_id' => 'asc'),
-			'where' => array('user_id' => $userid),
+			'where' => array(
+                'user_id' => $userid,
+                'deleted_at' => null,
+            ),
 		));
-
         $category_totals = array();
-        Config::load('define');
-        $Max_kinds = Config::get('kinds');
+        $All_Total = 0;
+        Config::load('define',true);
+        $Max_kinds = Config::get('define.kinds');
         for($i = 0; $i < $Max_kinds; $i++){
             $categorys = Model_Record::find('all', array(
-                'related' => array(
-                    'category_name',
-                    'login',
-                ),
                 'where' => array(
                     'category_id' => $i,
                     'user_id' => $userid,
+                    'deleted_at' => null,
                 )
             ));
             $total = Arr::sum($categorys, 'amount');
             $category_totals[$i] = $total;
+            $All_Total += $total;
         }
-        //DB側でwhere=userid, groupby(category), select category sum(amount)で配列取得。
-        Config::load('define',true);
-        $category_name = Config::get('category_name');
+       
+        $category_name = Config::get('define.category_name');
         $data = array(
             'posts' => $posts,
             'All_Total' => $All_Total,
@@ -62,7 +57,14 @@ class Controller_Kb_Kakeibo extends Controller
     //新規入力画面
     public function action_createForm()
     {
-        return View::forge('kakeibo/createForm', );
+        Config::load('define',true);
+        $Max_kinds = Config::get('define.kinds');
+        $category_name = Config::get('define.category_name');
+        $data = array(
+            'Max_kinds' => $Max_kinds,
+            'category_name' => $category_name,
+        );
+        return View::forge('kakeibo/createForm', $data);
     }
     public function post_createForm()
     {
@@ -80,7 +82,8 @@ class Controller_Kb_Kakeibo extends Controller
                 'user_id' => $userid,
             ))->execute();
 
-            return View::forge('kakeibo/createForm', );
+            return View::forge('kakeibo/createForm');
+            Response::redirect('/kb/kakeibo/index');
         }
         else{    #失敗の場合の処理
             Response::redirect('/kb/kakeibo/createForm'); 
@@ -93,10 +96,6 @@ class Controller_Kb_Kakeibo extends Controller
     {
         $userid = Session::get('userid');
         $posts = Model_Record::find('all', array(
-            'related' => array(
-                'category_name', 
-                'login',
-            ),
             'order_by' => array('category_id' => 'asc'),
             'where' => array(
                 'id' => $id, 
@@ -104,7 +103,7 @@ class Controller_Kb_Kakeibo extends Controller
             ),
         ));
         $data = array(
-            'edit_posts' => $posts,
+            'category_name' => $category_name,
         );
         return View::forge('kakeibo/editForm', $data);
     }
@@ -119,10 +118,6 @@ class Controller_Kb_Kakeibo extends Controller
                 #echo '成功';  #成功したとき
                 //値設定
                 $edit_data = Model_Record::find('all', array(    
-                    'related' => array(
-                        'category_name', 
-                        'login',
-                    ),
                     'order_by' => array('category_id' => 'asc'),
                     'where' => array(
                         'id' => $id, 
@@ -137,6 +132,7 @@ class Controller_Kb_Kakeibo extends Controller
                 $edit_data->save();
 
                 return View::forge('kakeibo/editForm', $data);
+                Response::redirect('/kb/kakeibo/index/' . $post->category_id);
             }
             else{    #失敗の場合の処理
                 foreach($val->error() as $key => $value){
@@ -151,14 +147,11 @@ class Controller_Kb_Kakeibo extends Controller
     {
         $userid = Session::get('userid');
         $posts = Model_Record::find('all', array(
-            'related' => array(
-                'category_name',
-                'login',
-            ),
             'order_by' => array('date' => 'desc'),
             'where' => array(
                 'category_id' => $category_id,
                 'user_id' => $userid,
+                'deleted_at' => null,
             ),
             
         ));
@@ -174,39 +167,24 @@ class Controller_Kb_Kakeibo extends Controller
     public function action_delete($id)
     {
         $userid = Session::get('userid');
-        $posts = Model_Record::find('all', array(    // 対象のレコードを取得
-            'related' => array(
-                'category_name', 
-                'login',
-            ),
-            'order_by' => array('category_id' => 'asc'),
-            'where' => array(
-                'id' => $id, 
-                'user_id' => $userid,
-            ),
-        ));
-        if($posts){
-            if ($posts->user_id == $userid) {
-                // レコードが見つかった場合の処理
-                // 削除
-                $posts->delete();
-                Session::set_flash('success', 'Deleted');
-            } 
-        }else {
-            // レコードが見つからなかった場合の処理
-            Session::set_flash('error', 'Record not found');
+        $post = Model_Record::find($id);
+        if($post){
+            $post->delete();
         }
         Response::redirect('/kb/kakeibo/index'); // 削除後に一覧画面にリダイレクト
-
-
     }
+
     public function action_logout(){
         //ログイン用のオブジェクト生成
         $userid = Session::get('userid');
         $auth = Auth::instance();
-        Auth::logout();
-        Session::delete('userid');
-        Response::redirect('/kb/login/login');
+        if(Auth::check()){
+            Auth::logout();
+            Session::delete('userid');
+            Response::redirect('/kb/login/login');
+        }else{
+            Response::redirect('/kb/login/login');
+        }
     }
 
 

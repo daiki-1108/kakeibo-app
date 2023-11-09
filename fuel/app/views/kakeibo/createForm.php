@@ -28,34 +28,20 @@
         <div class="t">
           <label for="category_id">カテゴリ：</label>
             <select name="category_id" required data-bind="value: category_id"> 
-                <option value="0">選択してください</option>
-                <option value="1">食費</option>
-                <option value="2">交通費</option>
-                <option value="3">趣味</option>
-                <option value="4">日用品</option>
-                <option value="5">交際費</option>
-                <option value="6">衣服・美容</option>
-                <option value="7">その他</option>
+              <option value="0">選択してください</option>
+                <?php for($i = 1; $i < $Max_kinds; $i++): ?>
+                  <?php $j = $i -1; ?>
+                  <option value="<?php echo $i; ?>"><?php  echo $category_name[$j]; ?></option>
+                <?php endfor; ?>
             </select>
           <br>
         </div>
      
-        <p class="submitbutton"><input type="submit" value="送信" name="send"></p><!-- 送信ボタン -->
+        <p class="submitbutton"><input type="submit" value="送信" name="send"></p>
         <div class="return">
           <td><a href="/kb/kakeibo/index">戻る</a></td>
         </div>
     </form>
-    
-
-              <?php
-                  if (isset($_POST['send'])) {
-                  // 保存ボタンが押された場合の処理を行う
-
-                  // 保存処理が成功したら詳細画面にリダイレクト
-                 header("Location: /kb/kakeibo/index/");
-               exit;
-                 }
-              ?>
   </div>    
 
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -63,14 +49,14 @@
 
   <script>
     function KakeiboViewModel() {
-    var self = this;
+    let self = this;
 
     self.date = ko.observable('');
     self.amount = ko.observable('');
     self.category_id = ko.observable('');
 
     self.saveForm = function () {
-        var formData = {
+        let formData = {
             date: self.date(),
             amount: self.amount(),
             category_id: self.category_id()
