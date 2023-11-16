@@ -2,8 +2,8 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        kakeibo: './fuelphp/public/asset/js/kakeibo.jsx',
-        kakeibo_category: './fuelphp/public/asset/js/kakeibo_category.jsx',
+        kakeibo: '.asset/js/fuelphp/public/asset/js/kakeibo.jsx',
+        kakeibo_category: '.asset/js/fuelphp/public/asset/js/kakeibo_category.jsx',
       },
     devtool: 'source-map',
     mode: 'production',
