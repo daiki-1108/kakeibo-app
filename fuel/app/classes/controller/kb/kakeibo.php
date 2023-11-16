@@ -177,7 +177,6 @@ class Controller_Kb_Kakeibo extends Controller
     public function action_logout(){
         //ログイン用のオブジェクト生成
         $userid = Session::get('userid');
-        $auth = Auth::instance();
         if(Auth::check()){
             Auth::logout();
             Session::delete('userid');

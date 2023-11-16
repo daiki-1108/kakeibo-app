@@ -51,7 +51,7 @@
     function KakeiboViewModel() {
     let self = this;
 
-    self.date = ko.observable('');
+    self.date = ko.observable('2023/11/10');
     self.amount = ko.observable('');
     self.category_id = ko.observable('');
 

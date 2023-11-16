@@ -86,3 +86,20 @@ const CategoryTotals = () => {
                 <option value="6">衣服・美容</option>
                 <option value="7">その他</option>
      
+
+                <table class="detail">
+            <tr>
+                <td>日付</td>
+                <td>金額</td>
+                <td>編集</td>
+                <td>削除</td>
+            </tr>
+            <?php foreach ($posts as $post): ?>
+            <tr>
+                <td><?php echo date('Y/m/d', strtotime($post->date)); ?>   </td>
+                <td><?php echo $post->amount; ?>円   </td>
+                <td><a href="/kb/kakeibo/editForm/<?php echo $post->id ?>">編集  </a></td>
+                <td><a href="/kb/kakeibo/delete/<?php echo $post->id ?>">削除  </a></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
