@@ -1,5 +1,7 @@
 メモ
-
+<?php foreach ($posts as $post): ?>
+    <td><?php  echo $post->amount; ?></td>
+    <?php endforeach; ?>
 <table class="top_detail">
         <tr>
           <th class="category">カテゴリ</th>

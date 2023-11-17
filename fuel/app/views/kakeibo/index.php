@@ -29,18 +29,20 @@
 
       <div id="like_button_container"></div>
   </div>   
-  
+  <?php foreach ($posts as $post): ?>
+    <td><?php  echo $post->amount; ?></td>
+    <?php endforeach; ?>
+
       <script>
         let posts = JSON.parse('<?php echo json_encode($posts); ?>');
-        let categoryTotals = JSON.parse(<?php echo json_encode($category_totals); ?>);
-        console.log('posts');
+        let categoryTotals = JSON.parse('<?php echo json_encode($category_totals); ?>');
       </script> 
       
 
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <?php echo Asset::js('kakeibo.jsx'); ?>
-  <?php echo Asset::js('kakeibo_category.jsx'); ?>
+  <?php echo Asset::js('/public/js/kakeibo.bundle.js'); ?>
+  <?php echo Asset::js('/public/js/kakeibo_category.bundle.js'); ?>
   <?php echo Asset::js('like_button.jsx'); ?>
   
 
