@@ -40,16 +40,6 @@
         <a href='/kb/login/login'>戻る</a>
     </div>
 </div>
-<?php
-    if (isset($_POST['submit'])) {
-    // 保存ボタンが押された場合の処理を行う
-
-    // 保存処理が成功したら詳細画面にリダイレクト
-    header("Location: /kb/login/login");
-    exit;
-    }
-?>
-
 
 </body>
 </html>

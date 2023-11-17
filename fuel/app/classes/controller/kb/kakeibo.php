@@ -6,7 +6,6 @@ class Controller_Kb_Kakeibo extends Controller
 {
     public function before(){
         parent::before();
-        
         //未ログイン時、ログインページリダイレクト
         if(!Auth::check()){
            Response::redirect('/kb/login/login');
@@ -103,7 +102,7 @@ class Controller_Kb_Kakeibo extends Controller
             ),
         ));
         $data = array(
-            'category_name' => $category_name,
+            'posts' => $posts,
         );
         return View::forge('kakeibo/editForm', $data);
     }
@@ -130,8 +129,6 @@ class Controller_Kb_Kakeibo extends Controller
                 ));
                 //保存
                 $edit_data->save();
-
-                return View::forge('kakeibo/editForm', $data);
                 Response::redirect('/kb/kakeibo/index/' . $post->category_id);
             }
             else{    #失敗の場合の処理
@@ -181,9 +178,7 @@ class Controller_Kb_Kakeibo extends Controller
             Auth::logout();
             Session::delete('userid');
             Response::redirect('/kb/login/login');
-        }else{
-            Response::redirect('/kb/login/login');
-        }
+        } 
     }
 
 

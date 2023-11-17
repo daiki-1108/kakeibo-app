@@ -17,7 +17,6 @@ class Controller_Kb_login extends Controller
             if($val->run()){
                 //ログイン用のオブジェクト生成
                 $auth = Auth::instance();
-
                 $username = Input::post('username');
                 $password = Input::post('password');
                 $user = Model_User::find('first', array(
@@ -25,8 +24,6 @@ class Controller_Kb_login extends Controller
                         'username' => $username
                     )
                 ));
-                
-
             if (!Auth::check()){
                 if($user){
                     if ($auth->login(Input::post('username'), Input::post('password')))
@@ -38,8 +35,6 @@ class Controller_Kb_login extends Controller
                         // ログイン失敗時の処理
                         Response::redirect('/kb/login/login');
                     }
-                }else{
-                     echo'ユーザがいません';
                 }
             } 
             }       
@@ -61,17 +56,14 @@ class Controller_Kb_login extends Controller
                             Input::post('email'),
                             1,
                        );
-                        return View::forge('login/logincreateForm', );
-                    }else{
-                        echo 'パスワードが一致していません';
+                        return View::forge('kb/login/logincreateForm');
+                        Response::redirect('kb/login/login');
                     }
-                }
-                else{    #失敗の場合の処理
+                }else{    #失敗の場合の処理
                     foreach($val->error() as $key => $value){
                         echo $value->get_message();
                         }
-                        exit;
-                    }
+                }
         }   
                 return View::forge('login/logincreateForm', );
     }
