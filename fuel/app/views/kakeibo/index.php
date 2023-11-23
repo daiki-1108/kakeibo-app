@@ -15,27 +15,23 @@
           <a href="/kb/kakeibo/logout/">ログアウト</a>
         </td>
       </div>
-      <div class="alltotal">
-        <td>合計額：<?php  echo $All_Total ?>円</td>
-      </div>
       <div class="createform">
         <td>
           <a href="/kb/kakeibo/createForm">新規入力</a>
         </td> 
       </div>
-<!-- 各カテゴリの合計額を表示 -->
-<!-- 合計額はデータベースから取得する -->   
+      <div class="alltotal">
+        <td>合計額：<?php  echo $All_Total ?>円</td>
+      </div>
+  
       <div id="category-totals-container"></div>
 
       <div id="like_button_container"></div>
   </div>   
-  <?php foreach ($posts as $post): ?>
-    <td><?php  echo $post->amount; ?></td>
-    <?php endforeach; ?>
 
       <script>
-        let posts = JSON.parse('<?php echo json_encode($posts); ?>');
-        let categoryTotals = JSON.parse('<?php echo json_encode($category_totals); ?>');
+        let posts = <?php echo str_replace('&quot;','',$posts_json) ; ?>;
+        let category_totals = <?php echo str_replace('&quot;','',$category_totals_json) ; ?>;
       </script> 
       
 

@@ -34,7 +34,11 @@ module.exports = {
           },
         ],
       },
-      resolve: {
+    resolve: {
         extensions: ['.js', '.jsx'],
-      },
+    },
+    cache: true,
+    watch: true,
+    keepalive: true,
+
 };

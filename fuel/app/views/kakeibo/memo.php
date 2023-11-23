@@ -105,3 +105,35 @@ const CategoryTotals = () => {
             </tr>
             <?php endforeach; ?>
         </table>
+
+
+        class KakeiboTable extends Component {
+    render() {
+
+        return (
+            <table className="top_detail">
+                <tr>
+                    <th className="category">カテゴリ</th>
+                    <th className="total">合計額</th>
+                </tr>
+                {this.props.posts.map(post => (
+                    <tr key={post.category_id}>
+                        <td>
+                            <a href={`/kb/kakeibo/detail/${post.category_id}`}>{this.props.category_name[post.category_id]}</a>
+                        </td>
+                        <td>
+                            {this.props.category_totals[post.category_id]}円
+                        </td>
+                    </tr>
+                ))}
+            </table>
+        );
+    }
+}
+
+export default KakeiboTable;
+
+ReactDOM.render(
+    <KakeiboTable posts={posts}  category_totals={category_totals} />,
+    document.getElementById('category-totals-container') 
+);

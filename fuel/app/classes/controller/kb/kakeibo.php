@@ -25,11 +25,20 @@ class Controller_Kb_Kakeibo extends Controller
                 'deleted_at' => null,
             ),
 		));
+        $Arr = array();
+        foreach ($posts as $post) {
+            $Arr[] = array(
+                'id' => $post->id,
+                'category_id' => $post->category_id,
+                'user_id' => $post->user_id,
+        );
+        }
+
         $category_totals = array();
         $All_Total = 0;
         Config::load('define',true);
         $Max_kinds = Config::get('define.kinds');
-        for($i = 0; $i < $Max_kinds; $i++){
+        for($i = 1; $i < $Max_kinds; $i++){
             $categorys = Model_Record::find('all', array(
                 'where' => array(
                     'category_id' => $i,
@@ -41,14 +50,19 @@ class Controller_Kb_Kakeibo extends Controller
             $category_totals[$i] = $total;
             $All_Total += $total;
         }
-       
         $category_name = Config::get('define.category_name');
+
+        $posts_json =  json_encode($Arr);
+        $category_totals_json = json_encode($category_totals);
+
         $data = array(
             'posts' => $posts,
             'All_Total' => $All_Total,
             'Max_kinds' => $Max_kinds,
             'category_totals' => $category_totals,
             'category_name' => $category_name,
+            'posts_json' => $posts_json,
+            'category_totals_json' => $category_totals_json,
         );
         return Response::forge(View::forge('kakeibo/index', $data));
     }
