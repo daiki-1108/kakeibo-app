@@ -37,8 +37,4 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
     },
-    cache: true,
-    watch: true,
-    keepalive: true,
-
 };
