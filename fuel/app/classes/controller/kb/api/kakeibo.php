@@ -75,7 +75,6 @@ class Controller_Kb_Api_Kakeibo extends Controller_Rest //api専用
             'success' => $insert,
         ])->to_json();
 
-
         return \Response::forge($json, 200, ['Content-Type' => 'application/json']);
     }
 
@@ -101,12 +100,9 @@ class Controller_Kb_Api_Kakeibo extends Controller_Rest //api専用
             'success' => $result,
         ])->to_json();
 
-
         return \Response::forge($json, 200, ['Content-Type' => 'application/json']); //apiで返す時jsonで
             
     }
-
-
 
     public function post_delete_account()
 	{

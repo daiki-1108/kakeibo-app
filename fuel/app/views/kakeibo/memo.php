@@ -1,149 +1,35 @@
-メモ
-<tr key={category_id}>
-                        <td>
-                            <a href={`/kb/kakeibo/detail/${i}`}>{category_totals.category_names[i-1]}</a>
-                        </td>
-                        <td>
-                            {category_totals[i]}円
-                        </td>
-                   
-                    </tr>
-<a href={`/kb/kakeibo/detail/${i}`}>{category_totals.category_names[i-1]}</a>
-<?php foreach ($posts as $post): ?>
-    <td><?php  echo $post->amount; ?></td>
-    <?php endforeach; ?>
-<table class="top_detail">
-        <tr>
-          <th class="category">カテゴリ</th>
-          <th class="total">合計額</th>
-        </tr> 
-            <?php $pre_id = 0 ?>
-            <?php foreach ($posts as $post): ?>
-              <?php if($post->category_id != $pre_id): ?>
-                  <tr> 
-                    <td><a href="/kb/kakeibo/detail/<?php echo $post->category_id; ?>"><?php echo $post->category_name->name; ?></a></td>
-                      <?php for($i = 0; $i < $Max_kinds; $i++): ?>
-                        <?php if($post->category_id == $i): ?>
-                          <td><?php  echo $category_totals[$i]; ?>円</td>
-                        <?php endif; ?>
-                       <?php endfor; ?>
-                  </tr>
-                <?php $pre_id = $post->category_id ?> 
-              <?php endif; ?>
-            <?php endforeach; ?>
-        </table>
-
-
-
-        <div id="category-totals-container"></div>
-        {Object.keys(categoryTotals).map(categoryId=> (    //mapメソッドでループ
-          <tr key={categoryId}>
-            <td><a href={`/kb/kakeibo/detail/${categoryId}`}>{category_name[categoryId]}</a></td>
-            <td>{categoryTotals[categoryId].total}円</td>
-          </tr>
-        ))}
-        <script>
-       let category_name = JSON.parse(<?php echo json_encode($posts); ?>);
-       let category_name = JSON.parse(<?php echo json_encode($category_name); ?>);
-       let categoryTotals = JSON.parse(<?php echo json_encode($category_totals); ?>);
-   </script>
-   
-const root = ReactDOM.render(
-  <CategoryTotals categoryTotals={categoryTotalsData} />,
-  document.getElementById('category-totals-container')
-  );
-  root.render(CategoryTotals);
-  import React from 'react';
-
-var roop_categorytotals = () => {
-  const items = [];
-  for (let i = 0; i < categoryTotals.length; i++) {
-    items.push(<li>{ categoryTotals[i] }</li>)
-  }
-  return <ul>{ items }</ul>;
-};
-
-var roop_categoryname = () => {
-  const names = [];
-  for (let i = 0; i < category_name.length; i++){
-    names.push(<li>{categoryName[i]}</li>)
-  }
-  return <ui>{names}</ui>;
-}
-
-const CategoryTotals = () => {
-  return (
-    <table>
-      <thead className="top_detail">
-        <tr>
-          <th className="category">カテゴリ</th>
-          <th className="total">合計額</th>
-        </tr>
-      </thead>
-      <tbody>
-            <td><a href={`/kb/kakeibo/detail/${categoryId}`}>{roop_categoryname()}</a></td>
-            <td>{roop_categorytotals()}円</td>
-      </tbody>
-    </table>
-  );
-};
-
-
-<option value="0">選択してください</option>
-                <option value="1">食費</option>
-                <option value="2">交通費</option>
-                <option value="3">趣味</option>
-                <option value="4">日用品</option>
-                <option value="5">交際費</option>
-                <option value="6">衣服・美容</option>
-                <option value="7">その他</option>
-     
-
-                <table class="detail">
-            <tr>
-                <td>日付</td>
-                <td>金額</td>
-                <td>編集</td>
-                <td>削除</td>
-            </tr>
-            <?php foreach ($posts as $post): ?>
-            <tr>
-                <td><?php echo date('Y/m/d', strtotime($post->date)); ?>   </td>
-                <td><?php echo $post->amount; ?>円   </td>
-                <td><a href="/kb/kakeibo/editForm/<?php echo $post->id ?>">編集  </a></td>
-                <td><a href="/kb/kakeibo/delete/<?php echo $post->id ?>">削除  </a></td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-
-
-        class KakeiboTable extends Component {
-    render() {
-
-        return (
-            <table className="top_detail">
-                <tr>
-                    <th className="category">カテゴリ</th>
-                    <th className="total">合計額</th>
-                </tr>
-                {this.props.posts.map(post => (
-                    <tr key={post.category_id}>
-                        <td>
-                            <a href={`/kb/kakeibo/detail/${post.category_id}`}>{this.props.category_name[post.category_id]}</a>
-                        </td>
-                        <td>
-                            {this.props.category_totals[post.category_id]}円
-                        </td>
-                    </tr>
-                ))}
-            </table>
+//新規入力画面
+    public function action_createForm()
+    {
+        Config::load('define',true);
+        $Max_kinds = Config::get('define.kinds');
+        $category_name = Config::get('define.category_name');
+        $data = array(
+            'Max_kinds' => $Max_kinds,
+            'category_name' => $category_name,
         );
+        return View::forge('kakeibo/createForm', $data);
     }
-}
+    public function post_createForm()
+    {
+        $userid = Session::get('userid');
+        $val = Validation::forge();
+        $val->add_field('date', '日付', 'required');#1=フィールド名、２＝日本語名、３＝ルール
+        $val->add_field('amount', '金額', 'required');
+        $val->add_field('category_id', 'カテゴリー', 'required');
+        if($val->run()){
+            #echo '成功';  #成功したとき
+            DB::insert('record')->set(array(
+                'date' => Input::post('date'),
+                'amount' => Input::post('amount'),
+                'category_id' => Input::post('category_id'),
+                'user_id' => $userid,
+            ))->execute();
 
-export default KakeiboTable;
-
-ReactDOM.render(
-    <KakeiboTable posts={posts}  category_totals={category_totals} />,
-    document.getElementById('category-totals-container') 
-);
+            return View::forge('kakeibo/createForm');
+            Response::redirect('/kb/kakeibo/index');
+        }
+        else{    #失敗の場合の処理
+            Response::redirect('/kb/kakeibo/createForm'); 
+        }
+    }
