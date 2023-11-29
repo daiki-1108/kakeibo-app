@@ -15,6 +15,7 @@
     </div>
     
     <?php echo Form::open(['action' => '/kb/login/logincreateForm', 'method' => 'post']); ?>
+    <?php echo \Form::csrf(); ?> <!-- csrfトークンget -->
         <div class="logincreateform">
             <label for="username">ユーザー名</label>
                 <?php echo Form::input('username', null, ['id' => 'username', 'class' => 'form-controll']); ?>

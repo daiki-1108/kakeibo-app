@@ -192,17 +192,6 @@ class Controller_Kb_Kakeibo extends Controller
             
     } 
 
-    //削除画面
-    public function action_delete($id)
-    {
-        $userid = Session::get('userid');
-        $post = Model_Record::find($id);
-        if($post){
-            $post->delete();
-        }
-        Response::redirect('/kb/kakeibo/index'); // 削除後に一覧画面にリダイレクト
-    }
-
     public function action_logout(){
         //ログイン用のオブジェクト生成
         $userid = Session::get('userid');

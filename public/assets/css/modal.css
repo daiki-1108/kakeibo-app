@@ -36,4 +36,5 @@
 .closeButton {
     align-self: flex-end;
     margin-bottom: 20px;
+    margin-right: 10px;
 }

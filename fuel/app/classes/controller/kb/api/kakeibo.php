@@ -54,6 +54,8 @@ class Controller_Kb_Api_Kakeibo extends Controller_Rest //api専用
 
         return \Response::forge($json, 200, ['Content-Type' => 'application/json']);
     }
+
+
     public function post_insert_record_data()
     {
         if (! Security::check_token()) {
@@ -69,6 +71,12 @@ class Controller_Kb_Api_Kakeibo extends Controller_Rest //api専用
             'user_id' => $userid,
         ))->execute();
         
+        $json = \Format::forge([
+            'success' => $insert,
+        ])->to_json();
+
+
+        return \Response::forge($json, 200, ['Content-Type' => 'application/json']);
     }
 
 

@@ -17,11 +17,6 @@
           <a href="/kb/kakeibo/logout/">ログアウト</a>
         </td>
       </div>
-      <div class="createform">
-        <td>
-          <a href="/kb/kakeibo/createForm">新規入力</a>
-        </td> 
-      </div>
       <div class="alltotal">
         <td>合計額：<?php  echo $All_Total ?>円</td>
       </div>
@@ -32,13 +27,10 @@
   <script>
     var current_token = fuel_csrf_token();
   </script> 
-      
 
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <?php echo Asset::js('kakeibo_category.bundle.js'); ?>
-
-  
 
 </body>
 </html>

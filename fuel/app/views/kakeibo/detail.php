@@ -34,14 +34,7 @@
                 <td>編集</td>
                 <td>削除</td>
             </tr>
-            <?php foreach ($posts as $post): ?>
-            <tr>
-                <td><?php echo date('Y/m/d', strtotime($post->date)); ?>   </td>
-                <td><?php echo $post->amount; ?>円   </td>
-                <td><a href="/kb/kakeibo/editForm/<?php echo $post->id ?>">編集  </a></td>
-                <td><a href="/kb/kakeibo/delete/<?php echo $post->id ?>">削除  </a></td>
-            </tr>
-            <?php endforeach; ?>
+            
         </table>
     </div>
 
@@ -72,7 +65,7 @@
                 </label>
                 <label>
                     メモ：
-                    <input type="text"  required data-bind="value: ">
+                    <input type="text"  required data-bind="value: memoFieldEdit">
                 </label>
                 <button type="submit">保存</button>
             </form>
@@ -109,29 +102,28 @@ function AppViewModel() {
 
             // モーダルウィンドウを表示
             $('#editModal').show();
-
-            
-        };
-    self.updateData = function(account) {
-        $.ajax({
-            url: 'http://localhost:8080/kb/api/kakeibo/update_account.json',  // 送信先URL
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                'id': account.id
-                'date': self.dateFieldToEdit(),
-                'amount': self.amountFieldToEdit(),
-                'memo': self.memoFieldEdit(),
-                'fuel_csrf_token':fuel_csrf_token()
-            },
-        }).done(function(res){
-            if(!res){ 
-                $('#editModal').hide();  
-            }else{
-                
-            }
-        })
     };
+
+    // self.updateData = function() {
+    //     $.ajax({
+    //         url: 'http://localhost:8080/kb/api/kakeibo/update_account.json',  // 送信先URL
+    //         type: 'POST',
+    //         dataType: 'json',
+    //         data: {
+    //             'id': account.id
+    //             'date': self.dateFieldToEdit(),
+    //             'amount': self.amountFieldToEdit(),
+    //             'memo': self.memoFieldEdit(),
+    //             'fuel_csrf_token':fuel_csrf_token()
+    //         },
+    //     }).done(function(res){
+    //         if(!res){ 
+    //             $('#editModal').hide();  
+    //         }else{
+                
+    //         }
+    //     })
+    // };
 
     self.removeData = function(account) {
         const data = {
@@ -156,6 +148,8 @@ function AppViewModel() {
  
 ko.applyBindings(new AppViewModel());
 
+
+ 
 </script>
 
 

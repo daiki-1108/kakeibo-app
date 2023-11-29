@@ -46,6 +46,9 @@ class Controller_Kb_login extends Controller
 
     public function action_logincreateForm(){
         if(Input::post()){
+            if (! \Security::check_token()) {  //csrf_tokenのチェック
+                return false;
+            }
             $val = Validation::forge();
             $val->add_field('username', 'ユーザネーム', 'required')->add_rule('min_length', 4)->add_rule('max_length', 15);
             $val->add_field('password', 'パスワード', 'required')->add_rule('min_length', 6)->add_rule('max_length', 20);
