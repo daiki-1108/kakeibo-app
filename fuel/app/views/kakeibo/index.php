@@ -6,6 +6,8 @@
     <title>家計簿</title>
     <?php echo Asset::css('indexstyle.css'); ?>
     <?php echo Asset::css('back.css'); ?>
+    <?php echo Asset::css('modal.css'); ?>
+    <?php echo \Security::js_fetch_token();?>
 </head>
 <body>
   <div class="colorchangeanime_bg">
@@ -25,21 +27,17 @@
       </div>
   
       <div id="category-totals-container"></div>
-
-      <div id="like_button_container"></div>
   </div>   
 
-      <script>
-        let posts = <?php echo str_replace('&quot;','',$posts_json) ; ?>;
-        let category_totals = <?php echo str_replace('&quot;','',$category_totals_json) ; ?>;
-      </script> 
+  <script>
+    var current_token = fuel_csrf_token();
+  </script> 
       
 
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <?php echo Asset::js('kakeibo.bundle.js'); ?>
   <?php echo Asset::js('kakeibo_category.bundle.js'); ?>
-  <?php echo Asset::js('like_button.jsx'); ?>
+
   
 
 </body>

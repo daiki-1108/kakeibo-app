@@ -26,7 +26,9 @@
             <a href='/kb/login/logincreateForm'>新規登録</a>
         </div>
             <?php echo Form::open(array('class' => 'form-horizontal', 'action' => '/kb/login/login', 'method' => 'post'));?>
-
+        
+        <!-- CSRFトークンを含む -->
+        <?php echo \Form::csrf(); ?> <!-- トークンの埋め込みはFormクラスを使って -->
 
         <div class="loginform">
             <label for="form_name" class="col-sm-4 ">ユーザ名</label>

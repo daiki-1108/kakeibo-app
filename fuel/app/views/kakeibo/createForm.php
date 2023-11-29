@@ -30,8 +30,7 @@
             <select name="category_id" required data-bind="value: category_id"> 
               <option value="0">選択してください</option>
                 <?php for($i = 1; $i < $Max_kinds; $i++): ?>
-                  <?php $j = $i -1; ?>
-                  <option value="<?php echo $i; ?>"><?php  echo $category_name[$j]; ?></option>
+                  <option value="<?php echo $i; ?>"><?php  echo $category_name[$i]; ?></option>
                 <?php endfor; ?>
             </select>
           <br>

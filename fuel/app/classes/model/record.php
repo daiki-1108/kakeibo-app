@@ -29,6 +29,11 @@ class Model_Record extends Orm\Model_Soft
             ),
 			'form'      => array('type' => false),
 		),
+		"memo" => array(
+			"label" => "Memo",
+			"data_type" => "text",
+			'form'      => array('type' => false),
+		),
 		//カテゴリーのid
 		"category_id" => array(
 			"label" => "Category_id",

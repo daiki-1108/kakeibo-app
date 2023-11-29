@@ -56,3 +56,7 @@ h1{
     margin-right: auto;
     font-size: 20px;
 }
+
+.m-auto{
+    margin:auto;
+}

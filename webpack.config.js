@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        kakeibo: './public/assets/js/my-app/src/kakeibo1.jsx',
+        kakeibo: './public/assets/js/my-app/src/kakeibo_modal.jsx',
         kakeibo_category: './public/assets/js/my-app/src/kakeibo_category.jsx',
       },
     devtool: 'source-map',
@@ -24,6 +24,7 @@ module.exports = {
         rules: [
           {
             test: /\.(js|jsx)$/,
+            use: ['style-loader', 'css-loader'],
             exclude: /node_modules/,
             use: {
               loader: 'babel-loader',

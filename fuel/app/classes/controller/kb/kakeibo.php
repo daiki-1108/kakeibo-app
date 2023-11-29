@@ -10,7 +10,6 @@ class Controller_Kb_Kakeibo extends Controller
         if(!Auth::check()){
            Response::redirect('/kb/login/login');
         }
-        $userid = Session::get('userid');
     }
     
     //トップ画面
@@ -38,6 +37,7 @@ class Controller_Kb_Kakeibo extends Controller
         $All_Total = 0;
         Config::load('define',true);
         $Max_kinds = Config::get('define.kinds');
+        $category_name = Config::get('define.category_name');
         for($i = 1; $i < $Max_kinds; $i++){
             $categorys = Model_Record::find('all', array(
                 'where' => array(
@@ -47,10 +47,12 @@ class Controller_Kb_Kakeibo extends Controller
                 )
             ));
             $total = Arr::sum($categorys, 'amount');
-            $category_totals[$i] = $total;
+            $category_totals[] = array(
+                'category_id' => $i,
+                'total' => $total,
+            );
             $All_Total += $total;
         }
-        $category_name = Config::get('define.category_name');
 
         $posts_json =  json_encode($Arr);
         $category_totals_json = json_encode($category_totals);
@@ -167,11 +169,27 @@ class Controller_Kb_Kakeibo extends Controller
             
         ));
         $total = Arr::sum($posts, 'amount');
-        $data = array(
-            'posts' => $posts,
-            'total' => $total,
-        );
-            return View::forge('kakeibo/detail', $data);
+
+        $data = [];
+        foreach ($posts as $post) {
+            $data[] = array(
+                'id' => $post->id,
+                'date' => $post->date,
+                'amount' => $post->amount,
+                'memo' => $post->memo,
+            );
+       
+        }
+        $json = \Format::forge([
+            'data' => $data,
+        ])->to_json();
+
+        $view = View::forge('kakeibo/detail');
+        $view->set('total',$total);
+        $view->set('posts',$posts);
+        $view->set('data',$data);
+        return $view; 
+            
     } 
 
     //削除画面

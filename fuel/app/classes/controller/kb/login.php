@@ -10,20 +10,24 @@ class Controller_Kb_login extends Controller
         $view->set('error', $error);
         return $view;
     }
-    public function post_login(){
-            $val = Validation::forge();
-            $val->add_field('username', 'ユーザネーム', 'required')->add_rule('min_length', 4)->add_rule('max_length', 15);
-            $val->add_field('password', 'パスワード', 'required')->add_rule('min_length', 6)->add_rule('max_length', 20);
-            if($val->run()){
-                //ログイン用のオブジェクト生成
-                $auth = Auth::instance();
-                $username = Input::post('username');
-                $password = Input::post('password');
-                $user = Model_User::find('first', array(
-                    'where' => array(
-                        'username' => $username
-                    )
-                ));
+    public function post_login()
+    {
+        if (! \Security::check_token()) {  //csrf_tokenのチェック
+            return false;
+        }
+        $val = Validation::forge();
+        $val->add_field('username', 'ユーザネーム', 'required')->add_rule('min_length', 4)->add_rule('max_length', 15);
+        $val->add_field('password', 'パスワード', 'required')->add_rule('min_length', 6)->add_rule('max_length', 20);
+        if($val->run()){
+            //ログイン用のオブジェクト生成
+            $auth = Auth::instance();
+            $username = Input::post('username');
+            $password = Input::post('password');
+            $user = Model_User::find('first', array(
+                'where' => array(
+                    'username' => $username
+                )
+            ));
             if (!Auth::check()){
                 if($user){
                     if ($auth->login(Input::post('username'), Input::post('password')))
@@ -37,7 +41,7 @@ class Controller_Kb_login extends Controller
                     }
                 }
             } 
-            }       
+        }       
     }
 
     public function action_logincreateForm(){

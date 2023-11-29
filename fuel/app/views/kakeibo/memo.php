@@ -1,4 +1,14 @@
 メモ
+<tr key={category_id}>
+                        <td>
+                            <a href={`/kb/kakeibo/detail/${i}`}>{category_totals.category_names[i-1]}</a>
+                        </td>
+                        <td>
+                            {category_totals[i]}円
+                        </td>
+                   
+                    </tr>
+<a href={`/kb/kakeibo/detail/${i}`}>{category_totals.category_names[i-1]}</a>
 <?php foreach ($posts as $post): ?>
     <td><?php  echo $post->amount; ?></td>
     <?php endforeach; ?>
