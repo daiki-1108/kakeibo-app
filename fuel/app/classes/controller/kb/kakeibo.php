@@ -1,6 +1,6 @@
 <?php
 
-use \Model\Record;
+use Model_Record;
 
 class Controller_Kb_Kakeibo extends Controller
 {
@@ -16,7 +16,9 @@ class Controller_Kb_Kakeibo extends Controller
     public function action_index()
     {
         $userid = Session::get('userid');
-        $All_Total = Model_Record::getTotalAmount($userid);
+
+        $All_Total = TopPage\Model_Record::getTotalAmount($userid);
+        
         $posts = Model_Record::find('all', array(
 			'order_by' => array('category_id' => 'asc'),
 			'where' => array(
@@ -122,6 +124,9 @@ class Controller_Kb_Kakeibo extends Controller
     public function action_detail($category_id)
     {
         $userid = Session::get('userid');
+
+        $All_Total = DetailPage\Model_Record::getTotalAmount($userid);
+
         $posts = Model_Record::find('all', array(
             'order_by' => array('date' => 'desc'),
             'where' => array(

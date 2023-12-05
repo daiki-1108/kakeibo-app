@@ -165,3 +165,13 @@ WARNING - 2023-11-29 07:42:02 --> Fuel\Core\Fuel::init - The configured locale j
 WARNING - 2023-11-29 07:42:22 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
 WARNING - 2023-11-29 07:42:22 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
 WARNING - 2023-11-29 07:42:22 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-11-29 08:32:10 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-11-29 08:32:24 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-11-29 08:32:55 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-11-29 08:32:56 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-11-29 08:32:57 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-11-29 08:33:34 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+ERROR - 2023-11-29 08:33:34 --> Error - CSRF validation failed, Possible hacking attempt detected! in C:\xampp\htdocs\fuelphp\fuel\core\classes\security.php on line 67
+WARNING - 2023-11-29 08:52:34 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-11-29 08:52:36 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.
+WARNING - 2023-11-29 08:52:36 --> Fuel\Core\Fuel::init - The configured locale ja_JP.utf8 is not installed on your system.

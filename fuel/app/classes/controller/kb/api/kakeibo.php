@@ -8,7 +8,6 @@ class Controller_Kb_Api_Kakeibo extends Controller_Rest //api専用
         Config::load('define',true);
         $category_name = Config::get('define.category_name');
         $category_totals = array();
-        Config::load('define',true);
         $Max_kinds = Config::get('define.kinds');
         for($i = 1; $i < $Max_kinds; $i++){
             $categorys = Model_Record::find('all', array(
